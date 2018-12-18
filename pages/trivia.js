@@ -8,7 +8,7 @@ class Trivia extends React.Component {
   render() {
     return (
       <div>
-        <p>trivia</p>
+        <p>Trivia</p>
         <Questions />
       </div>
     );
