@@ -1,5 +1,6 @@
 import React from "react";
 import Questions from "../components/Questions";
+import Footer from "../components/Footer";
 
 class Trivia extends React.Component {
   state = {
@@ -8,8 +9,9 @@ class Trivia extends React.Component {
   render() {
     return (
       <div>
-        <p>Trivia</p>
+        <h1>Trivia</h1>
         <Questions />
+        <Footer />
       </div>
     );
   }

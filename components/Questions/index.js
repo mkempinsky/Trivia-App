@@ -15,7 +15,7 @@ class Questions extends React.Component {
 
   fetchQuestions = () => {
     let level =
-      this.state.difficulty === null
+      this.state.difficulty === "random" || this.state.difficulty === null
         ? ""
         : `&difficulty=${this.state.difficulty}`;
 
@@ -48,33 +48,35 @@ class Questions extends React.Component {
     }
   };
   handleClick = level => {
-    const difficulty = level === "random" ? null : level;
-    this.setState(
-      {
-        difficulty
-      },
-      () => {
-        this.fetchQuestions();
-        console.log(this.state);
-      }
-    );
+    this.setState({
+      difficulty: level
+    });
   };
 
   render() {
     const questions = this.state.questions;
     const questionsCount = questions.length;
+    const currentLevel = this.state.difficulty || "random";
     return (
       <div>
-        <div style={{ display: "flex" }}>
+        <p>Select a level:</p>
+        <div className="levels-container">
           {levels.map(level => {
+            const active = level === currentLevel ? "active" : "";
             return (
-              <button onClick={() => this.handleClick(level)}>{level}</button>
+              <button
+                key={level}
+                className={`levels ${active}`}
+                onClick={() => this.handleClick(level)}
+              >
+                {level.toUpperCase()}
+              </button>
             );
           })}
         </div>
-        <p>
+        <div className="counter">
           {this.state.points}/{questionsCount}
-        </p>
+        </div>
         {questions.map(question => {
           return (
             <Question

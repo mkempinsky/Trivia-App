@@ -38,37 +38,62 @@ class Question extends React.Component {
   render() {
     const data = this.props.data;
     const question = getProp(data, "question");
+    console.log(data);
+    const difficulty = getProp(data, "difficulty");
     const answers = this.state.answers;
     return (
-      <div>
+      <div className="question-card">
         <p dangerouslySetInnerHTML={{ __html: question }} />
-        {this.state.answers && (
-          <div>
-            {answers.map(answer => {
-              const theme = this.state.isAnsweredCorrect
-                ? "correct"
-                : "incorrect";
-              const correctColor =
-                answer.correct && this.state.isAnsweredCorrect && "green";
-              const showCorrect =
-                answer.correct &&
-                this.state.isAnswered &&
-                !this.state.isAnsweredCorrect &&
-                "reveal-correct";
+        <div className="answers-container">
+          {this.state.answers && (
+            <div>
+              {answers.map(answer => {
+                const theme = this.state.isAnsweredCorrect
+                  ? "correct"
+                  : "incorrect";
+                const correctColor =
+                  answer.correct && this.state.isAnsweredCorrect && "green";
+                const showCorrect =
+                  answer.correct &&
+                  this.state.isAnswered &&
+                  !this.state.isAnsweredCorrect &&
+                  "reveal-correct";
 
-              return (
-                <Button
-                  key={answer.answer}
-                  className={`question ${correctColor} ${showCorrect}`}
-                  disabled={this.state.isAnswered}
-                  onClick={() => this.handleClick(answer.correct)}
-                >
-                  <span dangerouslySetInnerHTML={{ __html: answer.answer }} />
-                </Button>
-              );
-            })}
-          </div>
-        )}
+                return (
+                  <Button
+                    key={answer.answer}
+                    className={`question ${correctColor} ${showCorrect}`}
+                    disabled={this.state.isAnswered}
+                    onClick={() => this.handleClick(answer.correct)}
+                  >
+                    <span dangerouslySetInnerHTML={{ __html: answer.answer }} />
+                  </Button>
+                );
+              })}
+            </div>
+          )}
+        </div>
+        <div className="difficulty-container">
+          difficulty:{" "}
+          {difficulty && difficulty === "easy" && (
+            <span>
+              <i className={`fas fa-circle ${difficulty}`} />
+            </span>
+          )}
+          {difficulty && difficulty === "medium" && (
+            <span>
+              <i className={`fas fa-circle ${difficulty}`} />
+              <i className={`fas fa-circle ${difficulty}`} />
+            </span>
+          )}
+          {difficulty && difficulty === "hard" && (
+            <span>
+              <i className={`fas fa-circle ${difficulty}`} />
+              <i className={`fas fa-circle ${difficulty}`} />
+              <i className={`fas fa-circle ${difficulty}`} />
+            </span>
+          )}
+        </div>
       </div>
     );
   }
