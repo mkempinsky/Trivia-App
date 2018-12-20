@@ -42,7 +42,10 @@ class Question extends React.Component {
     const answers = this.state.answers;
     return (
       <div className="question-card">
-        <p dangerouslySetInnerHTML={{ __html: question }} />
+        <p
+          style={{ textAlign: "center" }}
+          dangerouslySetInnerHTML={{ __html: question }}
+        />
         <div className="answers-container">
           {this.state.answers && (
             <div>
@@ -73,7 +76,7 @@ class Question extends React.Component {
           )}
         </div>
         <div className="difficulty-container">
-          difficulty:{" "}
+          Level:{" "}
           {difficulty && difficulty === "easy" && (
             <span>
               <i className={`fas fa-circle ${difficulty}`} />
