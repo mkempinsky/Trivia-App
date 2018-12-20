@@ -14,6 +14,7 @@ class Questions extends React.Component {
   };
 
   fetchQuestions = () => {
+    console.log("fetching questions");
     let level =
       this.state.difficulty === "random" || this.state.difficulty === null
         ? ""
@@ -23,10 +24,15 @@ class Questions extends React.Component {
       .then(res => res.json())
       .then(
         result => {
-          this.setState({
-            isLoaded: true,
-            questions: result.results
-          });
+          this.setState(
+            {
+              isLoaded: true,
+              questions: result.results
+            },
+            () => {
+              console.log(this.state);
+            }
+          );
         },
         error => {
           this.setState({
@@ -48,9 +54,14 @@ class Questions extends React.Component {
     }
   };
   handleClick = level => {
-    this.setState({
-      difficulty: level
-    });
+    this.setState(
+      {
+        difficulty: level
+      },
+      () => {
+        this.fetchQuestions();
+      }
+    );
   };
 
   render() {

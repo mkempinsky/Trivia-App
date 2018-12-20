@@ -38,7 +38,6 @@ class Question extends React.Component {
   render() {
     const data = this.props.data;
     const question = getProp(data, "question");
-    console.log(data);
     const difficulty = getProp(data, "difficulty");
     const answers = this.state.answers;
     return (
