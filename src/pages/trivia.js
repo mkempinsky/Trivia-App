@@ -9,7 +9,7 @@ class Trivia extends React.Component {
   render() {
     return (
       <div style={{maxWidth: '700px', margin: '0 auto'}}>
-        <h1>Trivia</h1>
+        <h1>Totally Trivia</h1>
         <Questions />
       </div>
     );
