@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Trivia from "../pages/trivia";
+import Trivia from "./pages/trivia";
 import "./styles.css";
 
 function App() {

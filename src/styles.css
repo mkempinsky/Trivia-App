@@ -9,6 +9,19 @@ h1 {
   color: #fff;
   text-shadow: 0px 0px 10px rgba(47, 7, 67, 0.5);
 }
+.container {
+  display: flex;
+}
+.counter {
+  background: #fff;
+  position: fixed;
+  z-index: 10;
+  margin-top: 10px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: -3px 2px 10px rgba(000, 000, 000, 0.1);
+
+}
 button {
   font-family: "Raleway", sans-serif;
   border-radius: 5px;
@@ -60,24 +73,33 @@ button.reveal-correct:hover {
   background: linear-gradient(to right, #232526, #414345);
 }
 
-button.levels {
+button.levels,
+button.categories {
   background: #fff;
   border: 1px solid #e2e5ed;
-  width: 100px;
+  width: auto;
   padding: 10px;
-  margin: 0 5px;
+  margin: 5px 5px;
   color: #575757;
   font-weight: bold;
   font-size: 12px;
+
 }
-button.levels.active {
+button.levels.active,
+button.categories.active {
   border: 2px solid #4da8bf;
   color: #4da8bf;
 }
-button.levels:hover {
+button.levels:hover,
+button.categories:hover {
   cursor: pointer;
   transition: all 0.25s all;
   box-shadow: -3px 2px 10px rgba(000, 000, 000, 0.1);
+}
+.filters {
+  background: rgba(255,255,255, .6);
+  margin-bottom: 15px;
+  padding: 15px;
 }
 
 .question-card {
