@@ -5,6 +5,10 @@ body {
 .App {
   font-family: "Raleway", sans-serif;
 }
+a.restart {
+  color: teal;
+  font-weight: bold;
+}
 h1 {
   color: #fff;
   text-shadow: 0px 0px 10px rgba(47, 7, 67, 0.5);
@@ -33,6 +37,19 @@ h1 {
 button {
   font-family: "Raleway", sans-serif;
   border-radius: 5px;
+}
+button.start {
+  background: #5433ff;
+  background: linear-gradient(to right, #4da8bf, #57aabd);
+  color: #fff;
+  padding: 10px;
+  border: none;
+  margin: 3px;
+  width: 200px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-shadow: -2px 1px 2px rgba(000, 000, 000, 0.3);
+  font-size: 12.5px;
 }
 button.question {
   background: #5433ff;

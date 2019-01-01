@@ -41,7 +41,6 @@ class Question extends React.Component {
     const difficulty = getProp(data, "difficulty");
     const category = getProp(data, "category").replace('Entertainment:', '');
     const answers = this.state.answers;
-    console.log(category);
     return (
       <div className="question-card">
         <p

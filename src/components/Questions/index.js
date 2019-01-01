@@ -1,6 +1,7 @@
 import React from "react";
 import Question from "../QuestionSingle";
-import { getProp, shuffleArray } from "../../lib/utils";
+import swal from "sweetalert2";
+
 
 const levels = ["random", "easy", "medium", "hard"];
 const categories = [
@@ -25,10 +26,10 @@ class Questions extends React.Component {
     points: 0,
     difficulty: null,
     category: null,
+    isStarted: null,
+    questionsAnswered: 0
   };
-
   fetchQuestions = () => {
-    console.log("fetching questions");
     let level =
       this.state.difficulty === "random" || this.state.difficulty === null
         ? ""
@@ -42,10 +43,8 @@ class Questions extends React.Component {
             {
               isLoaded: true,
               points: 0,
-              questions: result.results
-            },
-            () => {
-              console.log(this.state);
+              questions: result.results,
+              isStarted: true
             }
           );
         },
@@ -57,24 +56,38 @@ class Questions extends React.Component {
         }
       );
   };
-  componentDidMount = () => {
-    this.fetchQuestions();
-  };
   updateCounter = isAnsweredCorrect => {
-    if (isAnsweredCorrect) {
+    console.log(this.state.questions.length);
       this.setState(prevState => ({
         ...prevState,
-        points: ++this.state.points
-      }));
-    }
+        points: isAnsweredCorrect && ++prevState.points || prevState.points,
+        questionsAnswered: ++prevState.questionsAnswered
+      }), () => {
+        if(this.state.questionsAnswered === this.state.questions.length){
+          swal({
+            title: 'Complete!',
+            text: `You got ${this.state.points} / ${this.state.questions.length} questions correct.`,
+            type: 'success',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Review Answers',
+            cancelButtonText: 'Start New Trivia'
+          }).then((result) => {
+            if (result.value) {
+              this.setState(prevState => ({
+                ...prevState,
+              }));
+              return;
+            }
+          })
+        }
+      });
   };
   handleLevelClick = level => {
     this.setState(
       {
         difficulty: level
-      },
-      () => {
-        this.fetchQuestions();
       }
     );
   };
@@ -82,70 +95,100 @@ class Questions extends React.Component {
     this.setState(
       {
         category
-      },
-      () => {
-        this.fetchQuestions();
       }
     );
   };
+  handleRestart = () => {
+    swal({
+      title: 'Are you sure?',
+      text: "You won't be able to come back to this quiz.",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, restart!'
+    }).then((result) => {
+      if (result.value) {
+        this.setState(prevState => ({
+          ...prevState, 
+          isStarted: null,
+          questionsAnswered: 0
+        }));
+        return;
+      }
+    })
+  }
 
   render() {
     const questions = this.state.questions;
     const questionsCount = questions.length;
     const currentLevel = this.state.difficulty || "random";
     const currentCategory = this.state.category || 9;
-
+    console.log(this.state.questionsAnswered);
     return (
       <div>
-        <div className="filters">
-          <p>Select a level:</p>
-          <div className="levels-container">
-            {levels.map(level => {
-              const active = level === currentLevel ? "active" : "";
-              return (
-                <button
-                  key={level}
-                  className={`levels ${active}`}
-                  onClick={() => this.handleLevelClick(level)}
-                >
-                  {level.toUpperCase()}
-                </button>
-              );
-            })}
+        {!this.state.isStarted && (
+          <div>
+          <div className="filters">
+            <p>Select a level:</p>
+            <div className="levels-container">
+              {levels.map(level => {
+                const active = level === currentLevel ? "active" : "";
+                return (
+                  <button
+                    key={level}
+                    className={`levels ${active}`}
+                    onClick={() => this.handleLevelClick(level)}
+                  >
+                    {level.toUpperCase()}
+                  </button>
+                );
+              })}
+            </div>
+            <p>Select a Category:</p>
+            <div className="levels-container">
+              {categories.map(category => {
+                const active = category.key === currentCategory ? "active" : "";
+                return (
+                  <button
+                    key={category.key}
+                    className={`categories ${active}`}
+                    onClick={() => this.handleCategoryClick(category.key)}
+                  >
+                    {category.title.toUpperCase()}
+                  </button>
+                );
+              })}
+            </div>
           </div>
-          <p>Select a Category:</p>
-          <div className="levels-container">
-            {categories.map(category => {
-              const active = category.key === currentCategory ? "active" : "";
-              return (
-                <button
-                  key={category.key}
-                  className={`categories ${active}`}
-                  onClick={() => this.handleCategoryClick(category.key)}
-                >
-                  {category.title.toUpperCase()}
-                </button>
-              );
-            })}
+          <div>
+            <button className="start" onClick={this.fetchQuestions}>Begin Trivia</button>
           </div>
-        </div>
-        <div className="container">
-          <div className="counter" style={{flex: '1'}}>
-            <h3 style={{margin: '0 0 5px 0'}}>Points:</h3>
-            {this.state.points}/{questionsCount}
           </div>
-          <div style={{flex: '2'}}>
-            {questions.map(question => {
-              return (
-                <Question
-                  key={question.question}
-                  data={question}
-                  triggerParentUpdate={this.updateCounter}
-                />
-              );
-            })}
+        )}
+        { this.state.isStarted && questions && (
+          <div className="container">
+              <div className="counter" style={{flex: '1'}}>
+                <h3 style={{margin: '0 0 5px 0'}}>Points:</h3>
+                {this.state.points}/{questionsCount}
+                <a 
+                  style={{display: 'block', fontSize: '12px', marginTop: '15px'}}
+                  onClick={this.handleRestart}>New Trivia</a>
+              </div>
+            <div style={{flex: '2'}}>
+              {questions.map(question => {
+                return (
+                  <Question
+                    key={question.question}
+                    data={question}
+                    triggerParentUpdate={this.updateCounter}
+                  />
+                );
+              })}
+            </div>
           </div>
-        </div>
+          )
+        }
       </div>
     );
   }
