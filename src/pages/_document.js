@@ -15,16 +15,18 @@ export default class Document extends Document_ {
                     <meta name="theme-color" content={blue(700)} />
                     <meta name="mobile-web-app-capable" content="yes" />
                     <link rel="icon" href="/static/favicon.ico" type="image/x-icon" />
-                    <link href="https://fonts.googleapis.com/css?family=Comfortaa:400,500,700&display=swap" rel="stylesheet"/>
-                    <link href="https://fonts.googleapis.com/css?family=Gudea:400,700&display=swap" rel="stylesheet"/>
+                    <link
+                        href="https://fonts.googleapis.com/css?family=Comfortaa:400,500,700&display=swap"
+                        rel="stylesheet"
+                    />
+                    <link
+                        href="https://fonts.googleapis.com/css?family=Work+Sans:400,500,600,700,800&display=swap"
+                        rel="stylesheet"
+                    />
 
                     <style dangerouslySetInnerHTML={{__html: globalStyles}} />
-                
-
                 </Head>
                 <body>
-           
-
                     <Main />
 
                     <NextScript />

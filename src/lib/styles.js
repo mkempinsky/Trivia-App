@@ -19,7 +19,7 @@ export const yellow = (shade, opacity = 1) => {
         default: `rgba(255, 179, 71, ${opacity})`
     };
     return shades[+shade] || shades.default;
-}
+};
 
 export const dropShadow = shadow => {
     const shadows = {
@@ -29,7 +29,16 @@ export const dropShadow = shadow => {
     return shadows[+shadow] || shadows.default;
 };
 
+// GRADIENTS
+export const purpleGradient = `linear-gradient(
+	to right,
+	#667eea,
+	#764ba2,
+	#6b8dd6,
+	#8e37d7
+);`;
 
+export const BREAKPOINT = '992px';
 
 // GLOBAL STYLES
 export const globalStyles = `
@@ -41,7 +50,7 @@ export const globalStyles = `
 	}
 	html, body {
 		height: 100%;
-        font-family: 'Gudea', sans-serif;
+        font-family: 'Work Sans', sans-serif;
 		color: #1C2838;
 		font-size: 16px;
 	}
@@ -55,8 +64,24 @@ export const globalStyles = `
     }
     h2 {
         font-family: 'Comfortaa', cursive;
-        font-size: 20px;
-    }
+        font-size: 32px;
+	}
+	h4 {
+		font-size: 28px;
+		font-weight: normal;
+
+	}
+	a {
+		font-family: 'Comfortaa', cursive;
+	}
+	p {
+		font-size: 18px;
+	}
+	@media screen and (min-width: ${BREAKPOINT}){
+		p {
+			font-size: 16px;
+		}
+	}
 	`;
 
 export const px = value => {
@@ -80,12 +105,8 @@ export const px = value => {
     }
 };
 
-export const BREAKPOINT = '992px';
-export const BREAKPOINT_PX = px(BREAKPOINT);
-
 export const MAX_WIDTH = '1280';
 export const MAX_WIDTH_PX = px(MAX_WIDTH);
-
 
 export function hexToRgb(hex) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);

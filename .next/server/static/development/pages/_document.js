@@ -1824,7 +1824,7 @@ module.exports = ReactPropTypesSecret;
 /*!***************************!*\
   !*** ./src/lib/styles.js ***!
   \***************************/
-/*! exports provided: blue, yellow, dropShadow, globalStyles, px, BREAKPOINT, BREAKPOINT_PX, MAX_WIDTH, MAX_WIDTH_PX, hexToRgb */
+/*! exports provided: blue, yellow, dropShadow, purpleGradient, BREAKPOINT, globalStyles, px, MAX_WIDTH, MAX_WIDTH_PX, hexToRgb */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1832,10 +1832,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "blue", function() { return blue; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "yellow", function() { return yellow; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dropShadow", function() { return dropShadow; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "purpleGradient", function() { return purpleGradient; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BREAKPOINT", function() { return BREAKPOINT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "globalStyles", function() { return globalStyles; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "px", function() { return px; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BREAKPOINT", function() { return BREAKPOINT; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BREAKPOINT_PX", function() { return BREAKPOINT_PX; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MAX_WIDTH", function() { return MAX_WIDTH; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MAX_WIDTH_PX", function() { return MAX_WIDTH_PX; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hexToRgb", function() { return hexToRgb; });
@@ -1866,7 +1866,16 @@ const dropShadow = shadow => {
     default: '0 14px 28px 0 rgba(37, 79, 115, 0.11)'
   };
   return shadows[+shadow] || shadows.default;
-}; // GLOBAL STYLES
+}; // GRADIENTS
+
+const purpleGradient = `linear-gradient(
+	to right,
+	#667eea,
+	#764ba2,
+	#6b8dd6,
+	#8e37d7
+);`;
+const BREAKPOINT = '992px'; // GLOBAL STYLES
 
 const globalStyles = `
 	* {
@@ -1877,7 +1886,7 @@ const globalStyles = `
 	}
 	html, body {
 		height: 100%;
-        font-family: 'Gudea', sans-serif;
+        font-family: 'Work Sans', sans-serif;
 		color: #1C2838;
 		font-size: 16px;
 	}
@@ -1891,8 +1900,24 @@ const globalStyles = `
     }
     h2 {
         font-family: 'Comfortaa', cursive;
-        font-size: 20px;
-    }
+        font-size: 32px;
+	}
+	h4 {
+		font-size: 28px;
+		font-weight: normal;
+
+	}
+	a {
+		font-family: 'Comfortaa', cursive;
+	}
+	p {
+		font-size: 18px;
+	}
+	@media screen and (min-width: ${BREAKPOINT}){
+		p {
+			font-size: 16px;
+		}
+	}
 	`;
 const px = value => {
   if (typeof value === 'number') {
@@ -1914,8 +1939,6 @@ const px = value => {
     return '25px';
   }
 };
-const BREAKPOINT = '992px';
-const BREAKPOINT_PX = px(BREAKPOINT);
 const MAX_WIDTH = '1280';
 const MAX_WIDTH_PX = px(MAX_WIDTH);
 function hexToRgb(hex) {
@@ -1970,7 +1993,7 @@ class Document extends next_document__WEBPACK_IMPORTED_MODULE_1___default.a {
       href: "https://fonts.googleapis.com/css?family=Comfortaa:400,500,700&display=swap",
       rel: "stylesheet"
     }), __jsx("link", {
-      href: "https://fonts.googleapis.com/css?family=Gudea:400,700&display=swap",
+      href: "https://fonts.googleapis.com/css?family=Work+Sans:400,500,600,700,800&display=swap",
       rel: "stylesheet"
     }), __jsx("style", {
       dangerouslySetInnerHTML: {
