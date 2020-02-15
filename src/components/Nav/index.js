@@ -96,7 +96,7 @@ export default class Nav extends React.Component {
                             transition: all 0.5s;
                         }
                         .sub-nav.expanded {
-                            width: 400px;
+                            width: 100%;
                             transition: all 0.5s;
                         }
                         ul {
