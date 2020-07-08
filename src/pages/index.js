@@ -10,11 +10,18 @@ const Homepage = () => {
     return (
         <Layout>
             <div className="hero">
-                <div className="overlay"></div>
+                <div className="overlay">
+                    <MaxWidth>
+                        <Link href="/trivia">
+                            <Button>Start New Game</Button>
+                        </Link>
+                    </MaxWidth>
+                </div>
             </div>
             <div className="main">
                 <MaxWidth>
-                    <div className="info__card">
+                    <div />
+                    {/* <div className="info__card">
                         <div className="info__card-content">
                             <h2>Download the App</h2>
                             <p>
@@ -34,12 +41,12 @@ const Homepage = () => {
                     </div>
                     <div className="info__card">
                         <HiddenOnMobile>
-                        <Image
-                            src="/static/woman-using-laptop.jpg"
-                            width="420px"
-                            height="320px"
-                            styled={true}
-                        />
+                            <Image
+                                src="/static/woman-using-laptop.jpg"
+                                width="420px"
+                                height="320px"
+                                styled={true}
+                            />
                         </HiddenOnMobile>
                         <div className="info__card-content">
                             <h2>Personalize Your Trivia</h2>
@@ -54,20 +61,20 @@ const Homepage = () => {
                             </Link>
                         </div>
                         <HiddenOnDesktop>
-                        <Image
-                            src="/static/woman-using-laptop.jpg"
-                            width="420px"
-                            height="320px"
-                            styled={true}
-                        />
+                            <Image
+                                src="/static/woman-using-laptop.jpg"
+                                width="420px"
+                                height="320px"
+                                styled={true}
+                            />
                         </HiddenOnDesktop>
-                    </div>
+                    </div> */}
                 </MaxWidth>
             </div>
             <style jsx>
                 {`
                     .hero {
-                        background-image: url('/static/hero.jpg');
+                        background-image: url('/static/abstract-bg.jpg');
                         background-size: cover;
                         background-position: left;
                         background-repeat: no-repeat;
@@ -77,20 +84,19 @@ const Homepage = () => {
                         box-shadow: inset 0 0 10px rgba(000, 000, 000, 0.2);
                         positon: relative;
                     }
-                    @media screen and (min-width: ${BREAKPOINT}){
+                    @media screen and (min-width: ${BREAKPOINT}) {
                         .hero {
                             min-height: 600px;
-                            background-position:  center;
-
+                            background-position: center;
                         }
                     }
                     .overlay {
                         width: 100%;
                         height: 450px;
-                        background: rgba(000, 000, 000, 0.3);
+                        background: rgba(000, 000, 000, 0.08);
                         positon: absolute;
                     }
-                    @media screen and (min-width: ${BREAKPOINT}){
+                    @media screen and (min-width: ${BREAKPOINT}) {
                         .overlay {
                             height: 600px;
                         }
@@ -99,14 +105,14 @@ const Homepage = () => {
                         padding: 50px 0;
                         height: auto;
                     }
-                    .info__card  {
+                    .info__card {
                         display: block;
                         width: 100%;
                         color: #fff;
                         text-align: left;
                         padding: 20px;
                     }
-                    @media screen and (min-width: ${BREAKPOINT}){
+                    @media screen and (min-width: ${BREAKPOINT}) {
                         .info__card {
                             display: flex;
                             align-items: center;
@@ -131,10 +137,9 @@ const Homepage = () => {
                     .info__card-content {
                         border-bottom: none;
                     }
-                    @media screen and (min-width: ${BREAKPOINT}){
+                    @media screen and (min-width: ${BREAKPOINT}) {
                         .info__card-content {
                             border-bottom: 2px solid #fff;
-
                         }
                     }
                 `}

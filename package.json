@@ -9,6 +9,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
+    "react-paypal-button-v2": "^2.6.2",
     "react-scripts": "^2.1.2",
     "sweetalert2": "^7.33.1"
   },

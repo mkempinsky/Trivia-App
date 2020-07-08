@@ -1,5 +1,5 @@
 // COLORS
-export const blue = shade => {
+export const blue = (shade) => {
     const shades = {
         200: '#4E9EE0',
         300: '#182957',
@@ -8,7 +8,7 @@ export const blue = shade => {
         550: '#0F2555',
         600: '#2F77B2',
         700: '#27323F',
-        default: '#2F77B2'
+        default: '#2F77B2',
     };
     return shades[+shade] || shades.default;
 };
@@ -16,15 +16,15 @@ export const blue = shade => {
 export const yellow = (shade, opacity = 1) => {
     const shades = {
         500: `rgba(255, 179, 71, ${opacity})`,
-        default: `rgba(255, 179, 71, ${opacity})`
+        default: `rgba(255, 179, 71, ${opacity})`,
     };
     return shades[+shade] || shades.default;
 };
 
-export const dropShadow = shadow => {
+export const dropShadow = (shadow) => {
     const shadows = {
         500: '0 14px 28px 0 rgba(37, 79, 115, 0.11)',
-        default: '0 14px 28px 0 rgba(37, 79, 115, 0.11)'
+        default: '0 14px 28px 0 rgba(37, 79, 115, 0.11)',
     };
     return shadows[+shadow] || shadows.default;
 };
@@ -42,6 +42,7 @@ export const BREAKPOINT = '992px';
 
 // GLOBAL STYLES
 export const globalStyles = `
+
 	* {
 		margin: 0;
 		padding: 0;
@@ -56,7 +57,33 @@ export const globalStyles = `
 	}
 	html {
 		-webkit-font-smoothing: antialiased;
-	}
+    }
+
+    :root {
+        --success: #49a147;
+		--warning: #ffad0d;
+        --error: #e35141;
+
+        --gray-100: #fafafa;
+        --gray-200: #f5f5f5;
+        --gray-300: #eeeeee;
+        --gray-400: #e0e0e0;
+        --gray-500: #bdbdbd;
+
+        --primary: 	#085f6b;
+
+        --secondary: #bdd9dd;
+
+        --interactive: #e3b132;
+        --interactive-100: #f9efd6;
+        --interactive-200: #f1d898;
+        --interactive-300: #e8c05a;
+        --interactive-400: #b58d28;
+
+
+        --font-title: 'Comfortaa', cursive;
+        --font-copy: "Raleway", sans-serif;
+    }
     h1 {
         font-family: 'Comfortaa', cursive;
         font-weight: Bold;
@@ -84,7 +111,7 @@ export const globalStyles = `
 	}
 	`;
 
-export const px = value => {
+export const px = (value) => {
     if (typeof value === 'number') {
         return value + 'px';
     } else if (typeof value === 'string') {
