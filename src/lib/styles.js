@@ -69,16 +69,18 @@ export const globalStyles = `
         --gray-300: #eeeeee;
         --gray-400: #e0e0e0;
         --gray-500: #bdbdbd;
+        --gray-600: #5e5e5e;
+        --gray-700: #252525;
 
         --primary: 	#085f6b;
 
         --secondary: #bdd9dd;
 
-        --interactive: #e3b132;
-        --interactive-100: #f9efd6;
-        --interactive-200: #f1d898;
-        --interactive-300: #e8c05a;
-        --interactive-400: #b58d28;
+        --interactive: #ffd700;
+        --interactive-100: #fff7cc;
+        --interactive-200: #ffef99;
+        --interactive-300: #ffe766;
+        --interactive-400: #ccac00;
 
 
         --font-title: 'Comfortaa', cursive;

@@ -5,29 +5,29 @@ import Button from '../Button';
 class Question extends React.Component {
     state = {
         isAnsweredCorrect: null,
-        isAnswered: null
+        isAnswered: null,
     };
     componentDidMount = () => {
         const data = this.props.data;
         const correctAnswer = getProp(data, 'correct_answer');
         const incorrrectAnswers = getProp(data, 'incorrect_answers');
         // create array with all answers as object
-        const answers = incorrrectAnswers.map(answer => {
+        const answers = incorrrectAnswers.map((answer) => {
             return {answer, correct: false};
         });
         answers.push({answer: correctAnswer, correct: true});
         const shuffledAnswers = shuffleArray(answers);
         this.setState({
-            answers: shuffledAnswers
+            answers: shuffledAnswers,
         });
         return;
     };
 
-    handleClick = answer => {
+    handleClick = (answer) => {
         this.setState(
             {
                 isAnsweredCorrect: answer,
-                isAnswered: true
+                isAnswered: true,
             },
             function() {
                 this.props.triggerParentUpdate(this.state.isAnsweredCorrect);
@@ -40,7 +40,7 @@ class Question extends React.Component {
         const question = getProp(data, 'question');
         const difficulty = getProp(data, 'difficulty');
         const category = getProp(data, 'category').replace('Entertainment:', '');
-        const answers = this.state.answers;
+        const {answers, isAnswered, isAnsweredCorrect} = this.state;
         return (
             <div className="question-card">
                 <p
@@ -48,31 +48,27 @@ class Question extends React.Component {
                     dangerouslySetInnerHTML={{__html: question}}
                 />
                 <div className="answers-container">
-                    {this.state.answers && (
+                    {answers && (
                         <div>
-                            {answers.map(answer => {
-                                const theme = this.state.isAnsweredCorrect
-                                    ? 'correct'
-                                    : 'incorrect';
+                            {answers.map((answer) => {
+                                const theme = isAnsweredCorrect ? 'correct' : 'incorrect';
                                 const correctColor =
-                                    answer.correct &&
-                                    this.state.isAnsweredCorrect &&
-                                    'green';
+                                    answer.correct && isAnsweredCorrect && 'correct';
                                 const showCorrect =
                                     answer.correct &&
-                                    this.state.isAnswered &&
-                                    !this.state.isAnsweredCorrect &&
+                                    isAnswered &&
+                                    !isAnsweredCorrect &&
                                     'reveal-correct';
-
+                                console.log(correctColor, showCorrect);
                                 return (
                                     <Button
                                         key={answer.answer}
                                         className={`question ${correctColor} ${showCorrect}`}
-                                        disabled={this.state.isAnswered}
+                                        disabled={isAnswered}
                                         onClick={() => this.handleClick(answer.correct)}>
                                         <span
                                             dangerouslySetInnerHTML={{
-                                                __html: answer.answer
+                                                __html: answer.answer,
                                             }}
                                         />
                                     </Button>
@@ -110,6 +106,7 @@ class Question extends React.Component {
                     {`
                         .question-card {
                             background: #fff;
+                            margin-bottom: 30px;
                         }
                     `}
                 </style>

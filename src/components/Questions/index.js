@@ -1,6 +1,7 @@
 import React from 'react';
 import Question from '../QuestionSingle';
 import Button from '../Button';
+import Scoreboard from '../ScoreBoard';
 import swal from 'sweetalert2';
 
 const levels = ['random', 'easy', 'medium', 'hard'];
@@ -24,8 +25,8 @@ class Questions extends React.Component {
         error: null,
         questions: [],
         points: 0,
-        difficulty: null,
-        category: null,
+        difficulty: 'random',
+        category: 9,
         isStarted: null,
         questionsAnswered: 0,
     };
@@ -121,22 +122,26 @@ class Questions extends React.Component {
     };
 
     render() {
-        const questions = this.state.questions;
+        const {questions, difficulty, category, isStarted} = this.state;
         const questionsCount = questions.length;
-        const currentLevel = this.state.difficulty || 'random';
-        const currentCategory = this.state.category || 9;
-        console.log(this.state.questionsAnswered);
+        const activeCategory = categories.filter((x) => x.key === category);
+        const categoryName = activeCategory[0].title;
         return (
             <div>
+                {isStarted && <Scoreboard category={categoryName} level={difficulty} />}
+                <Button theme="correct">Correct</Button>
+                <Button theme="incorrect">InCorrect</Button>
+                <Button theme="disabled">Disabled</Button>
+
                 {!this.state.isStarted && (
                     <div>
                         <div className="filters">
                             <p>Select a level:</p>
                             <div className="levels-container">
                                 {levels.map((level) => {
-                                    const active = level === currentLevel ? 'active' : '';
+                                    const active = level === difficulty ? 'active' : '';
                                     return (
-                                        <div>
+                                        <div key={level}>
                                             <Button
                                                 key={level}
                                                 className={`levels ${active}`}
@@ -151,18 +156,17 @@ class Questions extends React.Component {
                             </div>
                             <p>Select a Category:</p>
                             <div className="levels-container">
-                                {categories.map((category) => {
-                                    const active =
-                                        category.key === currentCategory ? 'active' : '';
+                                {categories.map((x) => {
+                                    const active = x.key === category ? 'active' : '';
                                     return (
-                                        <div>
+                                        <div key={x.key}>
                                             <Button
-                                                key={category.key}
+                                                key={x.key}
                                                 className={`categories ${active}`}
                                                 onClick={() =>
-                                                    this.handleCategoryClick(category.key)
+                                                    this.handleCategoryClick(x.key)
                                                 }>
-                                                {category.title.toUpperCase()}
+                                                {x.title.toUpperCase()}
                                             </Button>
                                         </div>
                                     );

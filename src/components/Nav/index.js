@@ -5,16 +5,16 @@ import Link from 'next/link';
 
 const navLinks = [
     {title: 'Play Trivia', href: '/trivia'},
-    {title: 'About', href: '/about'}
+    {title: 'About', href: '/about'},
 ];
 
 export default class Nav extends React.Component {
     state = {
-        isNavExpanded: null
+        isNavExpanded: null,
     };
     toggleNav = () => {
-        this.setState(prevState => ({
-            isNavExpanded: !prevState.isNavExpanded
+        this.setState((prevState) => ({
+            isNavExpanded: !prevState.isNavExpanded,
         }));
     };
     render() {
@@ -39,12 +39,12 @@ export default class Nav extends React.Component {
                         </div>
                         <div className={`sub-nav ${isNavExpanded ? 'expanded' : ''}`}>
                             <ul className={`${isNavExpanded ? 'expanded' : ''}`}>
-                                {navLinks.map(link => {
+                                {navLinks.map((link) => {
                                     const {title, href} = link;
                                     return (
-                                        <li>
-                                            <Link href={href} title={title}>
-                                                <a>{title}</a>
+                                        <li key={href}>
+                                            <Link href={href}>
+                                                <a title={title}>{title}</a>
                                             </Link>
                                         </li>
                                     );

@@ -7,13 +7,10 @@ const Layout = (props) => {
             <div className="page-content">{props.children}</div>
             <style jsx>
                 {`
-                     {
-                        /* .layout {
-                        background: #ffb347;
-                        background: -webkit-linear-gradient(to right, #ffcc33, #ffb347);
-                        background: linear-gradient(to right, #ffcc33, #ffb347);
+                    .layout {
                         min-height: 100vh;
-                    } */
+                        background: #fff;
+                        padding: 80px 0 160px 0;
                     }
                     .page-content {
                         margin-top: 80px;

@@ -1,21 +1,25 @@
 import React from 'react';
 import {purpleGradient} from '../../lib/styles';
 const Button = (props) => {
+    const {theme = ''} = props;
+    console.log(theme);
     return (
         <div>
-            <button {...props}>{props.children}</button>
+            <button {...props} className={theme}>
+                {props.children}
+            </button>
             <style jsx>{`
                 button {
-                    width: 300px;
-                    height: 50px;
-                    border-radius: 10px;
+                    max-width: 300px;
+                    padding: 10px 15px;
+                    border-radius: 3px;
                     border: 2px solid var(--interactive);
                     background: #fff;
-                    margin: 15px 0;
+                    margin: 10px 0;
                     cursor: pointer;
-                    color: var(--interactive);
+                    color: var(--gray-700);
                     font-weight: bold;
-                    font-size: 16px;
+                    font-size: 14px;
                     font-family: var(--font-title);
                 }
                 button:focus {
@@ -23,10 +27,24 @@ const Button = (props) => {
                 }
                 button:hover {
                     border: 2px solid var(--interactive-400);
-                    color: var(--interactive-400);
                 }
                 button.active {
                     background: var(--interactive-100);
+                }
+
+                button.correct {
+                    border: 2px solid var(--success);
+                    background: var(--success);
+                    color: #fff;
+                }
+                button.incorrect {
+                    border: 2px solid var(--error);
+                    background: var(--error);
+                    color: #fff;
+                }
+                button.disabled {
+                    border: 2px solid var(--gray-500);
+                    opacity: 0.5;
                 }
             `}</style>
         </div>
